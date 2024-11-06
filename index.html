@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="叶亦苏">
+  	<meta name="keywords" content="叶亦苏,个人网站">
+  	<meta name="description" content="叶亦苏的个人网站，包含了许多实用的工具">
+    <title>叶亦苏的小窝</title>
+    <link rel="icon" href="/images/QwQnky21KoX.png" type="image/png">
+  	<style>
+		.header {
+          position: fixed;
+          top: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
+            width: 100%;
+            height: 50px;
+            left: 0;
+            z-index: 1000;
+        }
+        .nav {
+            text-align: center;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 14px 30px;
+            text-decoration: none;
+            color: white;
+        }
+      	body:before {
+  content: ' ';
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url(/images/bg.PNG) center 0 no-repeat;
+  background-size: cover;
+}
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 120px 0 80px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+        .profile h1 {
+            margin: 0;
+        }
+      	.profile a {
+          	color: white;
+          	text-decoration: none;
+      }
+        .options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        .option {
+          	width: 200px;
+    		height: 200px;
+          	box-sizing: border-box;
+          	justify-content: center;
+    		-webkit-backdrop-filter: blur(15px);
+    		transform: translate3d(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px;
+            padding: 10px;
+            border: 2px solid transparent;
+            border-radius: 30px 30px 30px 30px;
+            text-align: left;
+  	        backdrop-filter: blur(15px);
+          	transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .option:hover {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-color: green;
+          	transform: translateY(-5px);
+    		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .option img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .option a {
+          	box-sizing: border-box;
+            text-decoration: none;
+            color: #E9EBFE;
+            width: 100%;
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0);
+            border-radius: 5px;
+            display: block;
+        }
+        .option .description {
+          	max-width: 100%;
+            margin-top: 10px;
+        }
+        .contect {
+          color: green;
+    width: 460px;
+    height: 200px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    transform: translate3d(0, 0, 0);
+    margin: 30px auto;
+    padding: 10px;
+    border: 2px solid transparent;
+    border-radius: 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+        .description {
+            text-align: left;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            max-width: 150px;
+            word-break: break-word;
+        }
+      	.green-button {
+    		display: flex;
+    		justify-content: center;
+    		margin: 20px 0;
+		}
+
+		.green-button a {
+    		display: inline-block;
+    		padding: 10px 20px;
+    		background-color: green !important;
+    		color: white;
+    		text-decoration: none;
+    		border-radius: 50px;
+		}
+      .footer {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+      </style>
+</head>
+<body>
+	<div class="header">
+        <div class="nav">
+            <a href="/">首页</a>
+            <a href="">敬请期待</a>
+        </div>
+    </div>
+    <div class="profile">
+        <img src="/images/QwQnky21KoX.png" alt="头像">
+        <h1><a href="https://b23.tv/PIzpofT" target="_blank">叶亦苏Yeisu</a></h1>
+    </div>
+  	<div class="green-button">
+    	<a href="https://afdian.com/a/yeisu" target="_blank">赞助</a>
+	</div>
+    <div class="contect">
+        <p>你好，陌生人<br><br>这是一个高中生自制的一个网站<br><br>希望你能在我的网站里找到想要的工具</p>
+    </div>
+    <div class="options">
+        <div class="option">
+            <a href="https://data.yeisu.cn" target="_blank">
+                <img src="https://alist.nn.ci/logo.svg" alt="图片加载错误">
+                <div class="description">这是资源站，拥有各种Galgame之类奇奇怪怪的资源</div>
+            </a>
+        </div>
+        <div class="option">
+            <a href="https://music.yeisu.cn" target="_blank">
+                <img src="https://music.yeisu.cn/img/icons/favicon-32x32.png" alt="图片加载错误">
+                <div class="description">一个高颜值的第三方网易云播放器</div>
+            </a>
+        </div>
+        <div class="option">
+            <a href="https://google.yeisu.cn" target="_blank">
+                <img src="/images/google.ico" alt="图片加载错误">
+                <div class="description">Google搜索代理（不可登录）</div>
+            </a>
+        </div>
+        <div class="option">
+            <a href="https://google-translate.yeisu.cn" target="_blank">
+                <img src="/images/google-translate.ico" alt="图片加载错误">
+                <div class="description">Google翻译代理（不可登录）</div>
+            </a>
+        </div>
+        <div class="option">
+            <a href="https://github.yeisu.cn" target="_blank">
+                <img src="/images/github.ico" alt="图片加载错误">
+                <div class="description">Github代理（不可登录）</div>
+            </a>
+        </div>
+        <div class="option">
+            <a href="https://acgrip.art" target="_blank">
+                <img src="https://acgrip.art/favicon.ico" alt="图片加载错误">
+                <div class="description">一个动漫下载站</div>
+            </a>
+        </div>
+        <div class="option">
+            <a href="https://ll.jsbar.cc" target="_blank">
+                <img src="https://ll.jsbar.cc/speed.png" alt="图片加载错误">
+                <div class="description">以浪费的形式消耗你的流量</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://zhouql.vip/bilibili" target="_blank">
+                <img src="https://zhouql.vip/bilibili/favicon.ico" alt="图片加载错误">
+                <div class="description">b站视频下载工具，免费极简方便</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://tools.miku.ac/what_anime_is_this" target="_blank">
+                <img src="https://tools.miku.ac/favicon.ico" alt="图片加载错误">
+                <div class="description">动漫图片找出处</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://anitabi.cn/map" target="_blank">
+                <img src="https://anitabi.cn/favicon.ico" alt="图片加载错误">
+                <div class="description">动画圣地巡礼攻略地图</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://iplark.com" target="_blank">
+                <img src="https://iplark.com/favicon.ico" alt="图片加载错误">
+                <div class="description">IP域名地址查询</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://www.tunemymusic.com" target="_blank">
+                <img src="https://www.tunemymusic.com/favicon.png" alt="图片加载错误">
+                <div class="description">在不同的音乐服务平台之间迁移播放列表</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://www.lrccon.com/convert.php" target="_blank">
+                <img src="https://www.lrccon.com/favicon.ico" alt="图片加载错误">
+                <div class="description">歌词字幕在线转换器</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://uutool.cn/html2markdown" target="_blank">
+                <img src="https://uutool.cn/favicon.ico" alt="图片加载错误">
+                <div class="description">HTML转markdown工具</div>
+            </a>
+        </div>
+      	<div class="option">
+            <a href="https://uutool.cn/extract-audio" target="_blank">
+                <img src="https://uutool.cn/favicon.ico" alt="图片加载错误">
+                <div class="description">视频提取音频工具</div>
+            </a>
+        </div>
+        <footer class="footer">
+            <div class="footer-content">
+                <script type="text/javascript">
+            function show_runtime() {
+                window.setTimeout("show_runtime()", 1000);
+                X = new Date("8/29/2024 2:28:00");
+                Y = new Date();
+                T = (Y.getTime() - X.getTime());
+                M = 24 * 60 * 60 * 1000;
+                a = T / M;
+                A = Math.floor(a);
+                b = (a - A) * 24;
+                B = Math.floor(b);
+                c = (b - B) * 60;
+                C = Math.floor((b - B) * 60);
+                D = Math.floor((c - C) * 60);
+                runtime_span.innerHTML = "本站已运行 " + A + "天" + B + "小时" + C + "分" + D + "秒"
+            }
+            show_runtime();
+        </script>
+        
+        <span id="runtime_span"></span>
+            </div>
+        </footer>
+    </body>
+</html>
