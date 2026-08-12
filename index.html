@@ -2,301 +2,566 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="author" content="叶亦苏">
-  	<meta name="keywords" content="叶亦苏,个人网站">
-  	<meta name="description" content="叶亦苏的个人网站，包含了许多实用的工具">
+    <meta name="keywords" content="叶亦苏,个人网站">
+    <meta name="description" content="叶亦苏的个人网站，包含了许多实用的工具">
+    <meta name="theme-color" content="#0b0f14">
+    <meta property="og:title" content="叶亦苏的小窝">
+    <meta property="og:description" content="叶亦苏的个人网站，包含了许多实用的工具">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/images/QwQnky21KoX.png">
     <title>叶亦苏的小窝</title>
     <link rel="icon" href="/images/QwQnky21KoX.png" type="image/png">
-  	<style>
-		.header {
-          position: fixed;
-          top: 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            -webkit-backdrop-filter: blur(20px);
-            backdrop-filter: blur(15px);
-            width: 100%;
-            height: 50px;
+    <style>
+        :root {
+            --bg-deep: #0b0f14;
+            --card-bg: rgba(16, 22, 30, 0.66);
+            --card-bg-hover: rgba(20, 28, 38, 0.8);
+            --hairline: rgba(255, 255, 255, 0.08);
+            --hairline-strong: rgba(255, 255, 255, 0.16);
+            --text: #e8ecf4;
+            --text-dim: #9aa7b8;
+            --text-faint: #6b7787;
+            --green: #3fb950;
+            --green-deep: #2ea44f;
+            --green-tint: rgba(63, 185, 80, 0.12);
+            --green-border: rgba(63, 185, 80, 0.45);
+            --green-glow: rgba(63, 185, 80, 0.18);
+            --blue-tint: rgba(56, 139, 253, 0.10);
+            --radius: 20px;
+            --radius-sm: 14px;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.28);
+            --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.45);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+        body {
+            margin: 0;
+            padding-bottom: 90px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            color: var(--text);
+            background-color: var(--bg-deep);
+        }
+        /* 背景层：背景图 + 暗色遮罩（保证文字可读性） */
+        body::before {
+            content: ' ';
+            position: fixed;
+            z-index: -2;
+            top: 0;
+            right: 0;
+            bottom: 0;
             left: 0;
+            background:
+                linear-gradient(180deg, rgba(9, 12, 17, 0.55) 0%, rgba(9, 12, 17, 0.82) 100%),
+                url(/images/bg.PNG) center 0 no-repeat;
+            background-size: cover;
+        }
+        /* 背景层：静态氛围光斑（无动画） */
+        body::after {
+            content: ' ';
+            position: fixed;
+            z-index: -1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background:
+                radial-gradient(ellipse 55% 40% at 85% -5%, rgba(63, 185, 80, 0.09), transparent 60%),
+                radial-gradient(ellipse 45% 35% at 8% 108%, rgba(102, 126, 234, 0.08), transparent 60%);
+            pointer-events: none;
+        }
+        ::selection {
+            background: rgba(63, 185, 80, 0.3);
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.14);
+            border-radius: 5px;
+            border: 2px solid var(--bg-deep);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.24);
+        }
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid var(--green-border);
+            outline-offset: 2px;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 54px;
             z-index: 1000;
+            background: rgba(10, 13, 18, 0.55);
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            backdrop-filter: blur(20px) saturate(1.3);
+            border-bottom: 1px solid var(--hairline);
         }
         .nav {
             text-align: center;
         }
-        .nav a {
+        .nav a,
+        .nav .nav-disabled {
             display: inline-block;
-            padding: 14px 30px;
+            padding: 16px 30px;
             text-decoration: none;
-            color: white;
+            color: var(--text);
+            font-size: 15px;
+            letter-spacing: 2px;
+            transition: color 0.25s ease;
         }
-      	body:before {
-  content: ' ';
-  position: fixed;
-  z-index: -1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: url(/images/bg.PNG) center 0 no-repeat;
-  background-size: cover;
-}
+        .nav .nav-disabled {
+            color: var(--text-faint);
+            cursor: default;
+        }
         .profile {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin: 120px 0 80px;
+            margin: 130px 0 40px;
         }
-        .profile img {
+        .avatar {
+            width: 106px;
+            height: 106px;
+            padding: 3px;
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin-right: 20px;
+            background: linear-gradient(135deg, #3fb950, #1f6feb 65%, #764ba2);
+            box-shadow: 0 0 24px rgba(63, 185, 80, 0.22);
+            margin-bottom: 20px;
+        }
+        .avatar img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
         }
         .profile h1 {
             margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 3px;
         }
-      	.profile a {
-          	color: white;
-          	text-decoration: none;
-      }
+        .profile a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.25s ease, text-shadow 0.25s ease;
+        }
+        .green-button {
+            display: flex;
+            justify-content: center;
+            margin: 26px 0 36px;
+        }
+        .green-button a {
+            display: inline-block;
+            padding: 11px 34px;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+            color: #fff;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 14px rgba(46, 164, 79, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+        }
+        .contact {
+            width: calc(100% - 40px);
+            max-width: 460px;
+            min-height: 190px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            padding: 26px 30px;
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius);
+            text-align: center;
+            color: var(--text-dim);
+            background: var(--card-bg);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            transform: translate3d(0, 0, 0);
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .contact p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 2;
+            letter-spacing: 1px;
+        }
         .options {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 50px;
+            margin-top: 40px;
+            max-width: 1180px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .option {
-          	width: 200px;
-    		height: 200px;
-          	box-sizing: border-box;
-          	justify-content: center;
-    		-webkit-backdrop-filter: blur(15px);
-    		transform: translate3d(0, 0, 0);
-            background-color: rgba(0, 0, 0, 0.3);
+            width: 216px;
+            min-height: 190px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 18px;
+            padding: 18px;
+            border: 1px solid var(--hairline);
+            border-radius: var(--radius);
+            background: var(--card-bg);
+            -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        }
+        .option .description {
+            max-width: 100%;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 13px;
+            line-height: 1.6;
+            word-break: break-word;
+        }
+        .option a {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 30px;
-            padding: 10px;
-            border: 2px solid transparent;
-            border-radius: 30px 30px 30px 30px;
-            text-align: left;
-  	        backdrop-filter: blur(15px);
-          	transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: var(--text);
+            width: 100%;
         }
-        .option:hover {
-            background-color: rgba(0, 0, 0, 0.3);
-            border-color: green;
-          	transform: translateY(-5px);
-    		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .option-icon {
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--hairline);
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
         }
         .option img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
         }
-        .option a {
-          	box-sizing: border-box;
-            text-decoration: none;
-            color: #E9EBFE;
+        .option:hover .option-icon {
+            background: var(--green-tint);
+            border-color: var(--green-border);
+            transform: scale(1.06);
+        }
+        .footer {
+            -webkit-backdrop-filter: blur(20px) saturate(1.3);
+            backdrop-filter: blur(20px) saturate(1.3);
+            background: rgba(10, 13, 18, 0.55);
+            color: var(--text-faint);
+            text-align: center;
+            padding: 14px 0 calc(14px + env(safe-area-inset-bottom));
             width: 100%;
-            padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0);
-            border-radius: 5px;
-            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            border-top: 1px solid var(--hairline);
+            font-size: 13px;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
         }
-        .option .description {
-          	max-width: 100%;
-            margin-top: 10px;
+        @media (max-width: 480px) {
+            body {
+                padding-bottom: calc(90px + env(safe-area-inset-bottom));
+            }
+            /* 手机竖屏：背景遮罩调浅，让照片可见 */
+            body::before {
+                background:
+                    linear-gradient(180deg, rgba(9, 12, 17, 0.42) 0%, rgba(9, 12, 17, 0.7) 100%),
+                    url(/images/bg.PNG) center 0 no-repeat;
+                background-size: cover;
+            }
+            .nav a,
+            .nav .nav-disabled {
+                padding: 16px 16px;
+                font-size: 14px;
+            }
+            .profile {
+                margin: 100px 0 30px;
+            }
+            .avatar {
+                width: 92px;
+                height: 92px;
+                margin-bottom: 16px;
+            }
+            .profile h1 {
+                font-size: 22px;
+                letter-spacing: 2px;
+            }
+            .green-button {
+                margin: 20px 0 28px;
+            }
+            .green-button a {
+                padding: 10px 28px;
+                font-size: 14px;
+            }
+            .contact {
+                min-height: 170px;
+                padding: 22px 24px;
+            }
+            .contact p {
+                font-size: 14px;
+            }
+            .options {
+                margin-top: 28px;
+                padding: 0 8px;
+            }
+            .option {
+                width: calc((100vw - 40px) / 2);
+                min-height: 168px;
+                margin: 8px;
+                padding: 14px 10px;
+            }
+            .option-icon {
+                width: 46px;
+                height: 46px;
+                margin-bottom: 10px;
+            }
+            .option img {
+                width: 22px;
+                height: 22px;
+            }
+            .option .description {
+                font-size: 13px;
+                line-height: 1.55;
+            }
         }
-        .contect {
-          color: green;
-    width: 460px;
-    height: 200px;
-    box-sizing: border-box;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.3);
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    transform: translate3d(0, 0, 0);
-    margin: 30px auto;
-    padding: 10px;
-    border: 2px solid transparent;
-    border-radius: 30px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-        .description {
-            text-align: left;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            max-width: 150px;
-            word-break: break-word;
+        @media (max-width: 340px) {
+            .option {
+                width: calc(100vw - 32px);
+                margin: 8px auto;
+            }
         }
-      	.green-button {
-    		display: flex;
-    		justify-content: center;
-    		margin: 20px 0;
-		}
-
-		.green-button a {
-    		display: inline-block;
-    		padding: 10px 20px;
-    		background-color: green !important;
-    		color: white;
-    		text-decoration: none;
-    		border-radius: 50px;
-		}
-      .footer {
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-}
-      </style>
+        @media (hover: hover) {
+            .nav a:hover {
+                color: var(--green);
+            }
+            .profile a:hover {
+                color: var(--green);
+                text-shadow: 0 0 18px var(--green-glow);
+            }
+            .green-button a:hover {
+                transform: translateY(-2px);
+                filter: brightness(1.08);
+                box-shadow: 0 8px 22px rgba(63, 185, 80, 0.4);
+            }
+            .contact:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--shadow-hover);
+            }
+            .option:hover {
+                background: var(--card-bg-hover);
+                border-color: var(--green-border);
+                transform: translateY(-6px);
+                box-shadow: var(--shadow-hover), 0 0 26px var(--green-glow);
+            }
+        }
+        @media (hover: none) {
+            .option:active {
+                background: var(--card-bg-hover);
+                border-color: var(--green-border);
+                transform: scale(0.97);
+            }
+            .option:active .option-icon {
+                background: var(--green-tint);
+                border-color: var(--green-border);
+            }
+            .green-button a:active {
+                transform: scale(0.97);
+            }
+        }
+    </style>
 </head>
 <body>
-	<div class="header">
-        <div class="nav">
+    <header class="header">
+        <nav class="nav">
             <a href="/">首页</a>
-            <a href="">敬请期待</a>
-        </div>
-    </div>
-    <div class="profile">
-        <img src="/images/QwQnky21KoX.png" alt="头像">
-        <h1><a href="https://b23.tv/PIzpofT" target="_blank">叶亦苏Yeisu</a></h1>
-    </div>
-  	<div class="green-button">
-    	<a href="https://afdian.com/a/yeisu" target="_blank">赞助</a>
-	</div>
-    <div class="contect">
-        <p>你好，陌生人<br><br>这是一个高中生自制的一个网站<br><br>希望你能在我的网站里找到想要的工具</p>
-    </div>
-    <div class="options">
-        <div class="option">
-            <a href="https://data.yeisu.cn" target="_blank">
-                <img src="https://alist.nn.ci/logo.svg" alt="图片加载错误">
-                <div class="description">这是资源站，拥有各种Galgame之类奇奇怪怪的资源</div>
-            </a>
-        </div>
-        <div class="option">
-            <a href="https://music.yeisu.cn" target="_blank">
-                <img src="https://music.yeisu.cn/img/icons/favicon-32x32.png" alt="图片加载错误">
-                <div class="description">一个高颜值的第三方网易云播放器</div>
-            </a>
-        </div>
-        <div class="option">
-            <a href="https://google.yeisu.cn" target="_blank">
-                <img src="/images/google.ico" alt="图片加载错误">
-                <div class="description">Google搜索代理（不可登录）</div>
-            </a>
-        </div>
-        <div class="option">
-            <a href="https://google-translate.yeisu.cn" target="_blank">
-                <img src="/images/google-translate.ico" alt="图片加载错误">
-                <div class="description">Google翻译代理（不可登录）</div>
-            </a>
-        </div>
-        <div class="option">
-            <a href="https://github.yeisu.cn" target="_blank">
-                <img src="/images/github.ico" alt="图片加载错误">
-                <div class="description">Github代理（不可登录）</div>
-            </a>
-        </div>
-        <div class="option">
-            <a href="https://acgrip.art" target="_blank">
-                <img src="https://acgrip.art/favicon.ico" alt="图片加载错误">
-                <div class="description">一个动漫下载站</div>
-            </a>
-        </div>
-        <div class="option">
-            <a href="https://ll.jsbar.cc" target="_blank">
-                <img src="https://ll.jsbar.cc/speed.png" alt="图片加载错误">
-                <div class="description">以浪费的形式消耗你的流量</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://zhouql.vip/bilibili" target="_blank">
-                <img src="https://zhouql.vip/bilibili/favicon.ico" alt="图片加载错误">
-                <div class="description">b站视频下载工具，免费极简方便</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://tools.miku.ac/what_anime_is_this" target="_blank">
-                <img src="https://tools.miku.ac/favicon.ico" alt="图片加载错误">
-                <div class="description">动漫图片找出处</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://anitabi.cn/map" target="_blank">
-                <img src="https://anitabi.cn/favicon.ico" alt="图片加载错误">
-                <div class="description">动画圣地巡礼攻略地图</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://iplark.com" target="_blank">
-                <img src="https://iplark.com/favicon.ico" alt="图片加载错误">
-                <div class="description">IP域名地址查询</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://www.tunemymusic.com" target="_blank">
-                <img src="https://www.tunemymusic.com/favicon.png" alt="图片加载错误">
-                <div class="description">在不同的音乐服务平台之间迁移播放列表</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://www.lrccon.com/convert.php" target="_blank">
-                <img src="https://www.lrccon.com/favicon.ico" alt="图片加载错误">
-                <div class="description">歌词字幕在线转换器</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://uutool.cn/html2markdown" target="_blank">
-                <img src="https://uutool.cn/favicon.ico" alt="图片加载错误">
-                <div class="description">HTML转markdown工具</div>
-            </a>
-        </div>
-      	<div class="option">
-            <a href="https://uutool.cn/extract-audio" target="_blank">
-                <img src="https://uutool.cn/favicon.ico" alt="图片加载错误">
-                <div class="description">视频提取音频工具</div>
-            </a>
-        </div>
-        <footer class="footer">
-            <div class="footer-content">
-                <script type="text/javascript">
-            function show_runtime() {
-                window.setTimeout("show_runtime()", 1000);
-                X = new Date("8/29/2024 2:28:00");
-                Y = new Date();
-                T = (Y.getTime() - X.getTime());
-                M = 24 * 60 * 60 * 1000;
-                a = T / M;
-                A = Math.floor(a);
-                b = (a - A) * 24;
-                B = Math.floor(b);
-                c = (b - B) * 60;
-                C = Math.floor((b - B) * 60);
-                D = Math.floor((c - C) * 60);
-                runtime_span.innerHTML = "本站已运行 " + A + "天" + B + "小时" + C + "分" + D + "秒"
-            }
-            show_runtime();
-        </script>
-        
-        <span id="runtime_span"></span>
+            <span class="nav-disabled" aria-disabled="true">敬请期待</span>
+        </nav>
+    </header>
+    <main>
+        <div class="profile">
+            <div class="avatar">
+                <img src="/images/QwQnky21KoX.png" alt="叶亦苏Yeisu 的头像">
             </div>
-        </footer>
-    </body>
+            <h1><a href="https://b23.tv/PIzpofT" target="_blank" rel="noopener noreferrer">叶亦苏Yeisu</a></h1>
+        </div>
+        <div class="green-button">
+            <a href="https://afdian.com/a/yeisu" target="_blank" rel="noopener noreferrer">赞助</a>
+        </div>
+        <div class="contact">
+            <p>你好，陌生人<br><br>这是高中生自制的个人网站<br><br>希望你能在我的网站里找到想要的工具</p>
+        </div>
+        <div class="options">
+            <div class="option">
+                <a href="https://data.yeisu.cn" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/alist.svg" alt="Alist 资源站" loading="lazy">
+                    </div>
+                    <div class="description">这是资源站，拥有各种Galgame之类奇奇怪怪的资源</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://music.yeisu.cn" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="https://music.yeisu.cn/img/icons/favicon-32x32.png" alt="第三方网易云播放器" loading="lazy">
+                    </div>
+                    <div class="description">一个高颜值的第三方网易云播放器</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://google.yeisu.cn" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/google.ico" alt="Google 搜索" loading="lazy">
+                    </div>
+                    <div class="description">Google搜索代理（不可登录）</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://google-translate.yeisu.cn" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/google-translate.ico" alt="Google 翻译" loading="lazy">
+                    </div>
+                    <div class="description">Google翻译代理（不可登录）</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://github.yeisu.cn" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/github.ico" alt="GitHub" loading="lazy">
+                    </div>
+                    <div class="description">GitHub代理（不可登录）</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://acgrip.art" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/acgrip.png" alt="ACG.RIP 动漫下载站" loading="lazy">
+                    </div>
+                    <div class="description">一个动漫下载站</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://ll.jsbar.cc" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/jsbar.png" alt="JSBar 流量消耗器" loading="lazy">
+                    </div>
+                    <div class="description">以浪费的形式消耗你的流量</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://zhouql.vip/bilibili" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/bilibili.ico" alt="bilibili 视频下载" loading="lazy">
+                    </div>
+                    <div class="description">b站视频下载工具，免费极简方便</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://tools.miku.ac/what_anime_is_this" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/mikuac.ico" alt="MikuTools 动漫识图" loading="lazy">
+                    </div>
+                    <div class="description">动漫图片找出处</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://anitabi.cn/map" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/anitabi.png" alt="Anitabi 圣地巡礼地图" loading="lazy">
+                    </div>
+                    <div class="description">动画圣地巡礼攻略地图</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://iplark.com" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/iplark.ico" alt="IPLark IP 查询" loading="lazy">
+                    </div>
+                    <div class="description">IP域名地址查询</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://www.tunemymusic.com" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/tunemymusic.jpg" alt="TuneMyMusic 歌单迁移" loading="lazy">
+                    </div>
+                    <div class="description">在不同的音乐服务平台之间迁移播放列表</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://www.lrccon.com/convert.php" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/lrccon.ico" alt="LRC 歌词转换" loading="lazy">
+                    </div>
+                    <div class="description">歌词字幕在线转换器</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://uutool.cn/html2markdown" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/uutool.ico" alt="HTML 转 Markdown 工具" loading="lazy">
+                    </div>
+                    <div class="description">HTML转markdown工具</div>
+                </a>
+            </div>
+            <div class="option">
+                <a href="https://uutool.cn/extract-audio" target="_blank" rel="noopener noreferrer">
+                    <div class="option-icon">
+                        <img src="/images/uutool.ico" alt="视频提取音频工具" loading="lazy">
+                    </div>
+                    <div class="description">视频提取音频工具</div>
+                </a>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <span id="runtime_span"></span>
+        </div>
+    </footer>
+    <script>
+        (function () {
+            var start = new Date("2024/08/29 02:28:00");
+            var span = document.getElementById("runtime_span");
+            if (!span) {
+                return;
+            }
+            function tick() {
+                var diff = Date.now() - start.getTime();
+                var days = Math.floor(diff / 86400000);
+                var hours = Math.floor(diff % 86400000 / 3600000);
+                var minutes = Math.floor(diff % 3600000 / 60000);
+                var seconds = Math.floor(diff % 60000 / 1000);
+                span.textContent = "本站已运行 " + days + "天" + hours + "小时" + minutes + "分" + seconds + "秒";
+            }
+            tick();
+            setInterval(tick, 1000);
+        })();
+    </script>
+</body>
 </html>
